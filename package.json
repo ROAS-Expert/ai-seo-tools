@@ -1,0 +1,24 @@
+{
+  "name": "ai-seo-tools",
+  "version": "1.0.0",
+  "description": "Open source engine behind the free ROAS Expert tools: AI SEO audit, product page check, agent readiness check, AI bot log analyzer, llms.txt and robots.txt generators, MER and CAC payback calculators.",
+  "license": "MIT",
+  "type": "module",
+  "homepage": "https://tools.roasexpert.com",
+  "repository": { "type": "git", "url": "git+https://github.com/roasexpert/ai-seo-tools.git" },
+  "keywords": ["seo", "ai-seo", "geo", "aeo", "llms-txt", "robots-txt", "gptbot", "claudebot", "perplexitybot", "shopify", "woocommerce", "agentic-commerce", "mcp", "cloudflare-workers", "seo-audit", "structured-data", "roas", "mer", "cac-payback", "log-analysis"],
+  "scripts": {
+    "dev": "wrangler dev",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "build:browser": "esbuild src/tools-browser.ts --bundle --format=iife --global-name=RZTools --target=es2019 --minify --outfile=dist/tools.js"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.5",
+    "@cloudflare/workers-types": "^5.20261019.1",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.12",
+    "wrangler": "^4.151.2"
+  }
+}

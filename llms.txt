@@ -1,0 +1,29 @@
+# AI SEO tools by ROAS Expert
+
+> Open source TypeScript engine behind the free tools at tools.roasexpert.com: AI SEO audit, product page check, agent readiness check, AI bot log analyzer, llms.txt and robots.txt generators, MER and CAC payback calculators. Runs on Cloudflare Workers and in the browser. MIT licensed.
+
+## Hosted tools
+- [AI SEO audit](https://tools.roasexpert.com/): score out of 100 with fixes for the detected CMS
+- [Product page check](https://tools.roasexpert.com/product): whether AI shopping assistants can read price, stock, shipping and returns
+- [Agent readiness check](https://tools.roasexpert.com/agent-check): whether an AI agent can find, read and buy from a store
+- [Compare with competitors](https://tools.roasexpert.com/compare): two or three sites side by side
+- [AI bot log analyzer](https://tools.roasexpert.com/bot-log): which AI crawlers visit, from an access log, in the browser
+- [llms.txt generator](https://tools.roasexpert.com/llms-txt)
+- [robots.txt builder for AI crawlers](https://tools.roasexpert.com/robots-ai)
+- [MER and break-even ROAS calculator](https://tools.roasexpert.com/mer-calculator)
+- [CAC payback calculator](https://tools.roasexpert.com/cac-payback)
+
+## For agents
+- [MCP server](https://tools.roasexpert.com/mcp): Streamable HTTP, no key
+- [OpenAPI](https://tools.roasexpert.com/api/openapi)
+- [Site llms.txt](https://tools.roasexpert.com/llms.txt)
+
+## Source
+- [README](README.md): tools, API, how to run
+- [AGENTS.md](AGENTS.md): rules for coding agents
+- src/engine/agent.ts: agent readiness check
+- src/engine/audit.ts: site audit
+- src/engine/product.ts: product page check
+- src/botlog.ts: log analyzer
+- src/calc.ts: calculators
+- src/generators.ts: llms.txt and robots.txt builders
