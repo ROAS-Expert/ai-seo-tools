@@ -5,8 +5,32 @@
   "license": "MIT",
   "type": "module",
   "homepage": "https://tools.roasexpert.com",
-  "repository": { "type": "git", "url": "git+https://github.com/ROAS-Expert/ai-seo-tools.git" },
-  "keywords": ["seo", "ai-seo", "geo", "aeo", "llms-txt", "robots-txt", "gptbot", "claudebot", "perplexitybot", "shopify", "woocommerce", "agentic-commerce", "mcp", "cloudflare-workers", "seo-audit", "structured-data", "roas", "mer", "cac-payback", "log-analysis"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ROAS-Expert/ai-seo-tools.git"
+  },
+  "keywords": [
+    "seo",
+    "ai-seo",
+    "geo",
+    "aeo",
+    "llms-txt",
+    "robots-txt",
+    "gptbot",
+    "claudebot",
+    "perplexitybot",
+    "shopify",
+    "woocommerce",
+    "agentic-commerce",
+    "mcp",
+    "cloudflare-workers",
+    "seo-audit",
+    "structured-data",
+    "roas",
+    "mer",
+    "cac-payback",
+    "log-analysis"
+  ],
   "scripts": {
     "dev": "wrangler dev",
     "test": "vitest run",
@@ -16,7 +40,6 @@
   "devDependencies": {
     "@cloudflare/vitest-plugin": "^1.4.5",
     "@cloudflare/workers-types": "^5.20261019.1",
-    "esbuild": "^0.28.2",
     "typescript": "^7.0.2",
     "vitest": "^4.1.12",
     "wrangler": "^4.151.2"
