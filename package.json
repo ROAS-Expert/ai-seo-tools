@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "homepage": "https://tools.roasexpert.com",
-  "repository": { "type": "git", "url": "git+https://github.com/roasexpert/ai-seo-tools.git" },
+  "repository": { "type": "git", "url": "git+https://github.com/ROAS-Expert/ai-seo-tools.git" },
   "keywords": ["seo", "ai-seo", "geo", "aeo", "llms-txt", "robots-txt", "gptbot", "claudebot", "perplexitybot", "shopify", "woocommerce", "agentic-commerce", "mcp", "cloudflare-workers", "seo-audit", "structured-data", "roas", "mer", "cac-payback", "log-analysis"],
   "scripts": {
     "dev": "wrangler dev",

@@ -59,7 +59,7 @@ The OpenAPI description is at [tools.roasexpert.com/api/openapi](https://tools.r
 ## Run it yourself
 
 ```bash
-git clone https://github.com/roasexpert/ai-seo-tools.git
+git clone https://github.com/ROAS-Expert/ai-seo-tools.git
 cd ai-seo-tools
 npm install
 npm test          # runs inside the Workers runtime

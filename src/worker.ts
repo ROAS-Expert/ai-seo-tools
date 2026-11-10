@@ -13,7 +13,7 @@ export default {
     const u = new URL(req.url);
     const target = u.searchParams.get('url') || '';
     const routes = ['/audit', '/product', '/agent-check'];
-    if (!routes.includes(u.pathname)) return json({ routes: routes.map((r) => r + '?url=example.com'), docs: 'https://github.com/roasexpert/ai-seo-tools' }, u.pathname === '/' ? 200 : 404);
+    if (!routes.includes(u.pathname)) return json({ routes: routes.map((r) => r + '?url=example.com'), docs: 'https://github.com/ROAS-Expert/ai-seo-tools' }, u.pathname === '/' ? 200 : 404);
     try {
       normaliseInput(target);
     } catch (e) {
