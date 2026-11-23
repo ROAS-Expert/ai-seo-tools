@@ -17,6 +17,11 @@ Everything runs on Cloudflare Workers or in the browser. No API keys. MIT licens
 | robots.txt builder for AI crawlers | Shows what a robots.txt does to 11 AI bots (GPTBot, ClaudeBot, PerplexityBot and the rest) and writes the file with existing rules kept. | [Run it](https://tools.roasexpert.com/robots-ai) | `src/generators.ts` |
 | MER and break-even ROAS calculator | Revenue, spend and costs in. MER, break-even ROAS, the MER needed for a target margin and profit per order out. | [Run it](https://tools.roasexpert.com/mer-calculator) | `src/calc.ts` |
 | CAC payback calculator | Payback month with churn and expansion, LTV, LTV to CAC and a payback curve. | [Run it](https://tools.roasexpert.com/cac-payback) | `src/calc.ts` |
+| Shopify theme detector | Reads a store homepage for the theme (and the Theme Store theme behind a renamed one), about 65 ecommerce apps and the tracking tags. Also reads WordPress and Magento themes. | [Run it](https://tools.roasexpert.com/shopify-theme-detector) | `src/engine/stack.ts` |
+| Pixel and tag checker | Finds Meta, GA4, GTM, Google Ads, TikTok and 9 more tags with their IDs, including Shopify app pixels, plus consent tools, server-side hints and double counting. | [Run it](https://tools.roasexpert.com/pixel-checker) | `src/engine/pixels.ts` |
+| Schema checker and generator | Checks a page's JSON-LD against required and recommended fields, then writes Product, Organization, FAQ, breadcrumb, article or local business markup, with a Shopify Liquid version. | [Run it](https://tools.roasexpert.com/schema-markup-generator) | `src/schemacheck.ts` |
+| UTM builder | Tagged links for Meta, Google Ads, TikTok, email and creators. Keeps ad platform macros intact and shows the GA4 channel each link lands in. | [Run it](https://tools.roasexpert.com/utm-builder) | `src/utm.ts` |
+| Profit margin calculator | Gross margin, markup, profit per order after shipping, fees, returns and ads, break-even ROAS and the price for a target margin. | [Run it](https://tools.roasexpert.com/profit-margin-calculator) | `src/margin.ts` |
 
 ## Use it from an AI assistant (MCP)
 
@@ -30,7 +35,22 @@ The hosted tools are available as an MCP server over Streamable HTTP. No install
 }
 ```
 
-Tools exposed: `audit_site`, `audit_product_page`, `check_ai_visibility`, `get_report`, `unlock_report`, `list_checks`, `explain_fix`.
+Twelve tools:
+
+| Tool | What it does |
+|---|---|
+| `audit_site` | Site audit with a score out of 100 and the status of every check |
+| `audit_product_page` | Product page check for AI shopping readiness |
+| `check_agent_readiness` | Whether an AI shopping agent can find, read and buy from a store |
+| `detect_store_stack` | Theme, apps and tracking tags of a store |
+| `check_tracking_pixels` | Tracking tags on a page, with IDs and setup issues |
+| `check_schema_markup` | Structured data on a page, what is missing and what to add |
+| `compare_sites` | Two or three sites side by side, with the checks the first one loses on |
+| `check_ai_visibility` | How often AI assistants name a brand for buyer questions |
+| `get_report` | Fetch a stored report by id |
+| `unlock_report` | Unlock every fix on a report with a work email |
+| `list_checks` | The catalogue of checks and weights |
+| `explain_fix` | The fix for one check on a given platform |
 
 Works with Claude, ChatGPT, Cursor and any other MCP client. Registry name: `com.roasexpert.tools/seo-audit`.
 
@@ -52,6 +72,11 @@ curl -X POST https://tools.roasexpert.com/api/agent-check \
 # Two or three sites side by side
 curl -X POST https://tools.roasexpert.com/api/compare \
   -H 'content-type: application/json' -d '{"urls":["mine.com","rival.com"]}'
+
+# Theme, apps and tracking tags / pixels on a page / schema on a page
+curl -X POST https://tools.roasexpert.com/api/stack -H 'content-type: application/json' -d '{"url":"store.com"}'
+curl -X POST https://tools.roasexpert.com/api/pixels -H 'content-type: application/json' -d '{"url":"store.com"}'
+curl -X POST https://tools.roasexpert.com/api/schema -H 'content-type: application/json' -d '{"url":"store.com/products/example"}'
 ```
 
 The OpenAPI description is at [tools.roasexpert.com/api/openapi](https://tools.roasexpert.com/api/openapi). The hosted API is rate limited per visitor.

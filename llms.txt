@@ -12,9 +12,14 @@
 - [robots.txt builder for AI crawlers](https://tools.roasexpert.com/robots-ai)
 - [MER and break-even ROAS calculator](https://tools.roasexpert.com/mer-calculator)
 - [CAC payback calculator](https://tools.roasexpert.com/cac-payback)
+- [Shopify theme detector](https://tools.roasexpert.com/shopify-theme-detector): theme, apps and tracking tags of any store
+- [Pixel and tag checker](https://tools.roasexpert.com/pixel-checker): tracking tags with IDs, Shopify app pixels, consent and double counting
+- [Schema checker and generator](https://tools.roasexpert.com/schema-markup-generator): what JSON-LD a page has, what is missing, and the code to fix it
+- [UTM builder](https://tools.roasexpert.com/utm-builder): tagged links with the GA4 channel each one lands in
+- [Profit margin calculator](https://tools.roasexpert.com/profit-margin-calculator): margin, markup, profit per order and break-even ROAS
 
 ## For agents
-- [MCP server](https://tools.roasexpert.com/mcp): Streamable HTTP, no key
+- [MCP server](https://tools.roasexpert.com/mcp): Streamable HTTP, no key. Tools: audit_site, audit_product_page, check_agent_readiness, detect_store_stack, check_tracking_pixels, check_schema_markup, compare_sites, check_ai_visibility, get_report, unlock_report, list_checks, explain_fix
 - [OpenAPI](https://tools.roasexpert.com/api/openapi)
 - [Site llms.txt](https://tools.roasexpert.com/llms.txt)
 
