@@ -17,9 +17,12 @@
 - [Schema checker and generator](https://tools.roasexpert.com/schema-markup-generator): what JSON-LD a page has, what is missing, and the code to fix it
 - [UTM builder](https://tools.roasexpert.com/utm-builder): tagged links with the GA4 channel each one lands in
 - [Profit margin calculator](https://tools.roasexpert.com/profit-margin-calculator): margin, markup, profit per order and break-even ROAS
+- [Redirect checker](https://tools.roasexpert.com/redirect-checker): every hop, chains, loops and the four homepage versions
+- [Broken link checker](https://tools.roasexpert.com/broken-link-checker): broken, redirected and refused links on a page
+- [Meta and Open Graph tag checker](https://tools.roasexpert.com/meta-tag-checker): title, description, canonical, og tags and share image
 
 ## For agents
-- [MCP server](https://tools.roasexpert.com/mcp): Streamable HTTP, no key. Tools: audit_site, audit_product_page, check_agent_readiness, detect_store_stack, check_tracking_pixels, check_schema_markup, compare_sites, check_ai_visibility, get_report, unlock_report, list_checks, explain_fix
+- [MCP server](https://tools.roasexpert.com/mcp): Streamable HTTP, no key. Tools: audit_site, audit_product_page, check_agent_readiness, detect_store_stack, check_tracking_pixels, check_schema_markup, check_redirects, check_broken_links, check_meta_tags, compare_sites, check_ai_visibility, get_report, unlock_report, list_checks, explain_fix
 - [OpenAPI](https://tools.roasexpert.com/api/openapi)
 - [Site llms.txt](https://tools.roasexpert.com/llms.txt)
 

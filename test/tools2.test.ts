@@ -1,3 +1,4 @@
+import type { Fetcher } from '../src/engine/types';
 import { describe, expect, it } from 'vitest';
 import { buildUtm, ga4Channel, parseUtm, lintUtm } from '../src/utm';
 import { marginCalc } from '../src/margin';
@@ -109,5 +110,49 @@ describe('stack', () => {
     const s = detectStack(html, cms('woocommerce'));
     expect(s.theme).toMatchObject({ name: 'astra-child', original: 'astra' });
     expect(s.apps.map((a) => a.name)).toEqual(['Klaviyo', 'Judge.me']);
+  });
+});
+
+import { extractLinks, redirectFindings, checkMeta, checkLinks, redirectChain } from '../src/engine/sitehealth';
+const fakeFetch = (map: Record<string, { status: number; headers?: Record<string, string>; body?: string }>) =>
+  (async (input: RequestInfo | URL) => {
+    const u = String(input instanceof Request ? input.url : input);
+    const r = map[u] || { status: 404 };
+    return new Response(r.body ?? '', { status: r.status, headers: r.headers });
+  }) as unknown as Fetcher;
+
+describe('site health', () => {
+  it('extracts unique http links and skips mail and anchors', () => {
+    const l = extractLinks('<a href="/a">A</a><a href="/a#x">dup</a><a href="mailto:x@y.z">m</a><a href="#top">t</a><a href=\'https://other.com/b\'>B <b>bold</b></a>', 'https://shop.com/p');
+    expect(l.map((x) => x.url)).toEqual(['https://shop.com/a', 'https://other.com/b']);
+    expect(l[1].text).toBe('B bold');
+  });
+  it('flags chains, temporary redirects and split versions', () => {
+    const chain = { start: 'http://a.com/', hops: [{ url: 'http://a.com/', status: 302, location: 'https://a.com/', ms: 1 }, { url: 'https://a.com/', status: 301, location: 'https://www.a.com/', ms: 1 }, { url: 'https://www.a.com/', status: 200, location: null, ms: 1 }], final: 'https://www.a.com/', finalStatus: 200, loop: false };
+    const other = { start: 'https://a.com/x', hops: [{ url: 'https://a.com/x', status: 200, location: null, ms: 1 }], final: 'https://a.com/x', finalStatus: 200, loop: false };
+    const t = redirectFindings(chain, [other]).map((f) => f.level + ' ' + f.title);
+    expect(t.some((x) => /^warn Redirect chain of 2 hops/.test(x))).toBe(true);
+    expect(t.some((x) => /^warn Temporary redirect \(302\)/.test(x))).toBe(true);
+    expect(t.some((x) => /^fail The http, https/.test(x))).toBe(true);
+  });
+  it('follows a chain hop by hop and detects loops', async () => {
+    const f = fakeFetch({ 'https://a.com/1': { status: 301, headers: { location: '/2' } }, 'https://a.com/2': { status: 301, headers: { location: 'https://a.com/1' } } });
+    const c = await redirectChain(f, 'https://a.com/1');
+    expect(c.loop).toBe(true);
+  });
+  it('sorts links into ok, redirect, broken and refused', async () => {
+    const f = fakeFetch({ 'https://shop.com/ok': { status: 200 }, 'https://shop.com/old': { status: 301, headers: { location: '/new' } }, 'https://linkedin.com/x': { status: 403 } });
+    const r = await checkLinks(f, '<a href="/ok">o</a><a href="/old">r</a><a href="/gone">g</a><a href="https://linkedin.com/x">l</a>', 'https://shop.com/');
+    expect(r.counts).toEqual({ ok: 1, redirect: 1, broken: 1, blocked: 1, error: 0 });
+    expect(r.findings[0].title).toBe('1 broken link');
+  });
+  it('checks meta tags and the og:image', async () => {
+    const page = { finalUrl: 'https://shop.com/p', html: { title: 'Blue shirt | Shop', metaDescription: '', canonical: '', metaRobots: 'noindex', lang: 'en', og: { title: 'Blue shirt', image: '/i.jpg' }, twitter: {} } } as unknown as Parameters<typeof checkMeta>[1];
+    const r = await checkMeta(fakeFetch({ 'https://shop.com/i.jpg': { status: 200, headers: { 'content-type': 'image/jpeg' } } }), page);
+    const t = r.findings.map((x) => x.level + ' ' + x.title);
+    expect(t).toContain('fail The page tells search engines not to index it');
+    expect(t).toContain('warn og:image is a relative address');
+    expect(t).toContain('pass og:image loads');
+    expect(r.score).toBeLessThan(60);
   });
 });

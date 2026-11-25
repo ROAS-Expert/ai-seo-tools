@@ -14,7 +14,7 @@ Everything runs on Cloudflare Workers or in the browser. No API keys. MIT licens
 | Compare with competitors | Runs the audit on two or three sites and shows the checks a competitor passes that you fail. | [Run it](https://tools.roasexpert.com/compare) | `src/engine/audit.ts` |
 | AI bot log analyzer | Reads a server access log in the browser and shows which of 22 AI and search crawlers visit, what they read and what gets blocked. | [Run it](https://tools.roasexpert.com/bot-log) | `src/botlog.ts` |
 | llms.txt generator | Builds an llms.txt in the llmstxt.org shape from a homepage and sitemap. | [Run it](https://tools.roasexpert.com/llms-txt) | `src/generators.ts` |
-| robots.txt builder for AI crawlers | Shows what a robots.txt does to 11 AI bots (GPTBot, ClaudeBot, PerplexityBot and the rest) and writes the file with existing rules kept. | [Run it](https://tools.roasexpert.com/robots-ai) | `src/generators.ts` |
+| robots.txt builder for AI crawlers | Shows what a robots.txt does to 11 AI bots (GPTBot, ClaudeBot, PerplexityBot and the rest), tests any path against the current and new file, and writes the file with existing rules kept. | [Run it](https://tools.roasexpert.com/robots-ai) | `src/generators.ts` |
 | MER and break-even ROAS calculator | Revenue, spend and costs in. MER, break-even ROAS, the MER needed for a target margin and profit per order out. | [Run it](https://tools.roasexpert.com/mer-calculator) | `src/calc.ts` |
 | CAC payback calculator | Payback month with churn and expansion, LTV, LTV to CAC and a payback curve. | [Run it](https://tools.roasexpert.com/cac-payback) | `src/calc.ts` |
 | Shopify theme detector | Reads a store homepage for the theme (and the Theme Store theme behind a renamed one), about 65 ecommerce apps and the tracking tags. Also reads WordPress and Magento themes. | [Run it](https://tools.roasexpert.com/shopify-theme-detector) | `src/engine/stack.ts` |
@@ -22,6 +22,9 @@ Everything runs on Cloudflare Workers or in the browser. No API keys. MIT licens
 | Schema checker and generator | Checks a page's JSON-LD against required and recommended fields, then writes Product, Organization, FAQ, breadcrumb, article or local business markup, with a Shopify Liquid version. | [Run it](https://tools.roasexpert.com/schema-markup-generator) | `src/schemacheck.ts` |
 | UTM builder | Tagged links for Meta, Google Ads, TikTok, email and creators. Keeps ad platform macros intact and shows the GA4 channel each link lands in. | [Run it](https://tools.roasexpert.com/utm-builder) | `src/utm.ts` |
 | Profit margin calculator | Gross margin, markup, profit per order after shipping, fees, returns and ads, break-even ROAS and the price for a target margin. | [Run it](https://tools.roasexpert.com/profit-margin-calculator) | `src/margin.ts` |
+| Redirect checker | Follows an address hop by hop: status codes, chains, loops, 302s, https drops, and whether the http, https, www and non-www versions agree. | [Run it](https://tools.roasexpert.com/redirect-checker) | `src/engine/sitehealth.ts` |
+| Broken link checker | Checks up to 40 links on one page: working, redirected, broken, refused or no answer, with the link text. | [Run it](https://tools.roasexpert.com/broken-link-checker) | `src/engine/sitehealth.ts` |
+| Meta and Open Graph tag checker | Title and description lengths, canonical, robots, og tags and X card, and whether og:image loads. | [Run it](https://tools.roasexpert.com/meta-tag-checker) | `src/engine/sitehealth.ts` |
 
 ## Use it from an AI assistant (MCP)
 
@@ -35,7 +38,7 @@ The hosted tools are available as an MCP server over Streamable HTTP. No install
 }
 ```
 
-Twelve tools:
+Fifteen tools:
 
 | Tool | What it does |
 |---|---|
@@ -45,6 +48,9 @@ Twelve tools:
 | `detect_store_stack` | Theme, apps and tracking tags of a store |
 | `check_tracking_pixels` | Tracking tags on a page, with IDs and setup issues |
 | `check_schema_markup` | Structured data on a page, what is missing and what to add |
+| `check_redirects` | Redirect chain of an address, and the four versions of a homepage |
+| `check_broken_links` | Broken, redirected and refused links on a page |
+| `check_meta_tags` | Title, description, canonical and Open Graph tags on a page |
 | `compare_sites` | Two or three sites side by side, with the checks the first one loses on |
 | `check_ai_visibility` | How often AI assistants name a brand for buyer questions |
 | `get_report` | Fetch a stored report by id |
@@ -77,6 +83,11 @@ curl -X POST https://tools.roasexpert.com/api/compare \
 curl -X POST https://tools.roasexpert.com/api/stack -H 'content-type: application/json' -d '{"url":"store.com"}'
 curl -X POST https://tools.roasexpert.com/api/pixels -H 'content-type: application/json' -d '{"url":"store.com"}'
 curl -X POST https://tools.roasexpert.com/api/schema -H 'content-type: application/json' -d '{"url":"store.com/products/example"}'
+
+# Redirect chain / broken links / meta and Open Graph tags
+curl -X POST https://tools.roasexpert.com/api/redirects -H 'content-type: application/json' -d '{"url":"http://store.com"}'
+curl -X POST https://tools.roasexpert.com/api/links -H 'content-type: application/json' -d '{"url":"store.com/blogs/news"}'
+curl -X POST https://tools.roasexpert.com/api/meta -H 'content-type: application/json' -d '{"url":"store.com/products/example"}'
 ```
 
 The OpenAPI description is at [tools.roasexpert.com/api/openapi](https://tools.roasexpert.com/api/openapi). The hosted API is rate limited per visitor.

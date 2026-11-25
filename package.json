@@ -1,7 +1,7 @@
 {
   "name": "ai-seo-tools",
   "version": "1.0.0",
-  "description": "Open source engine behind the free ROAS Expert tools: AI SEO audit, product page check, agent readiness check, Shopify theme detector, pixel checker, schema checker and generator, AI bot log analyzer, llms.txt and robots.txt generators, UTM builder, MER, profit margin and CAC payback calculators.",
+  "description": "Open source engine behind the free ROAS Expert tools: AI SEO audit, product page check, agent readiness check, Shopify theme detector, pixel checker, schema checker and generator, redirect checker, broken link checker, meta tag checker, AI bot log analyzer, llms.txt and robots.txt generators, UTM builder, MER, profit margin and CAC payback calculators.",
   "license": "MIT",
   "type": "module",
   "homepage": "https://tools.roasexpert.com",

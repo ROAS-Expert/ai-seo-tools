@@ -2,9 +2,9 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.roasexpert.tools/seo-audit",
   "title": "ROAS Expert free AI SEO audit",
-  "description": "Free AI SEO audit, product page check, agent readiness check and site comparison. No key.",
+  "description": "Free AI SEO audit plus store, tracking pixel, schema, redirect, link and meta tag checks. No key.",
   "websiteUrl": "https://tools.roasexpert.com/#mcp",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "remotes": [
     {
       "type": "streamable-http",
